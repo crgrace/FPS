@@ -12,7 +12,7 @@
 ///////////////////////////////////////////////////////////////////
 
 module external_interface
-    #(parameter NUMREGS = 67)
+    #(parameter NUMREGS = 9)
     (output logic [7:0] config_bits [0:NUMREGS-1], // output bits
     output logic piso,      // UART output
     input logic posi,       // UART input

@@ -54,6 +54,8 @@ always_comb begin
 end // always_comb
 
 
+/*
+//TP: commented the tx_clock couter to add ripple carry coutner
 // 4-bit counter to generate tx clock
 always_ff @ (posedge clk or negedge reset_n) begin
     if (!reset_n) begin
@@ -63,7 +65,36 @@ always_ff @ (posedge clk or negedge reset_n) begin
         txclk_counter <= txclk_counter + 1'b1;
     end
 end // always_ff
+*/
 
+// ripple-carry counter to generate tx clock
+tff
+    tff_inst_0 (
+    .q          (txclk_counter[0]),
+    .clk        (clk),
+    .reset_n    (reset_n)
+    );
+
+tff
+    tff_inst_1 (
+    .q          (txclk_counter[1]),
+    .clk        (txclk_counter[0]),
+    .reset_n    (reset_n)
+    );
+
+tff
+    tff_inst_2 (
+    .q          (txclk_counter[2]),
+    .clk        (txclk_counter[1]),
+    .reset_n    (reset_n)
+    );
+
+tff
+    tff_inst_3 (
+    .q          (txclk_counter[3]),
+    .clk        (txclk_counter[2]),
+    .reset_n    (reset_n)
+    );
 
 always_ff @(posedge clk or negedge reset_n) begin
     if (!reset_n) State <= IDLE;

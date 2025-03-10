@@ -8,7 +8,7 @@
 ///////////////////////////////////////////////////////////////////
 
 module regfile
-    #(parameter NUMREGS = 6)
+    #(parameter NUMREGS = 9)
     (output logic [7:0] config_bits [0:NUMREGS-1], // output bits
     output logic [7:0] read_data,           // RAM data out (for readback)
     input logic [7:0] write_addr,           // RAM write address 
